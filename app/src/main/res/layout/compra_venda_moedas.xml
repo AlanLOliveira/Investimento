@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".main.CompraVendaMoedas">
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_venda_compra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_TelaCambio_Voltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="234dp"
+        android:layout_marginStart="9dp"
+        android:background="@color/black"
+        android:drawableLeft="@drawable/ic_baseline_voltar"
+        android:fontFamily="@font/helvetica"
+        android:text="Câmbio"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/tv_TelaCompraVenda_Resultado"
+        android:layout_width="327dp"
+        android:layout_height="190dp"
+        android:text="Parabéns!               Você acabou de comprar 100 USD - Dollar, totalizando      R$ 517,50"
+        android:textColor="@color/green"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:layout_margin="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_TelaCambio_Vender"
+        android:layout_width="151dp"
+        android:layout_height="43dp"
+        android:layout_margin="24dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginBottom="584dp"
+        android:background="@drawable/shape_botao"
+        android:fontFamily="@font/arial"
+        android:gravity="center"
+        android:text="HOME"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_TelaCompraVenda_Resultado"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_editor_absoluteX="112dp"
+        app:layout_editor_absoluteY="584dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

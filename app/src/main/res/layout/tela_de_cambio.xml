@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.TelaDeCambio">
+
+ <include
+     android:id="@+id/include_toolbar_TelaCambio"
+     layout="@layout/toolbar_cambio"
+     tools:layout_editor_absoluteX="136dp"
+     tools:layout_editor_absoluteY="0dp" />
+
+ <LinearLayout
+     android:id="@+id/linearLayout_TelaCambio"
+     android:layout_width="327dp"
+     android:layout_height="200dp"
+     android:layout_margin="12dp"
+     android:layout_marginTop="88dp"
+     android:background="@drawable/shape_cambio_info"
+     android:orientation="vertical"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintVertical_bias="0.0">
+
+  <TextView
+      android:id="@+id/tv_TelaCambio_SiglaEMoeda"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:fontFamily="@font/arial_black"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textSize="22sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/tv_TelaCambio_Variacao"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:padding="8dp"
+      android:textColor="@color/green"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SiglaEMoeda"
+      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SiglaEMoeda"
+      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_SiglaEMoeda" />
+
+  <TextView
+      android:id="@+id/tv_TelaCambio_ValorCompra"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:fontFamily="@font/arial"
+      android:padding="8dp"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_Variacao"
+      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_Variacao"
+
+      />
+
+  <TextView
+      android:id="@+id/tv_TelaCambio_ValorVenda"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:fontFamily="@font/arial"
+      android:padding="6dp"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_ValorCompra"
+      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_ValorCompra" />
+
+ </LinearLayout>
+
+ <TextView
+     android:id="@+id/tv_TelaCambio_SdDisponivel"
+     android:layout_width="327dp"
+     android:layout_height="27dp"
+     android:layout_margin="24dp"
+     android:text="Saldo disponível: R$ 1000"
+     android:textColor="@color/white"
+     android:textSize="24sp"
+     app:layout_constraintEnd_toEndOf="@+id/linearLayout_TelaCambio"
+     app:layout_constraintStart_toStartOf="@+id/linearLayout_TelaCambio"
+     app:layout_constraintTop_toBottomOf="@+id/linearLayout_TelaCambio" />
+
+ <TextView
+     android:id="@+id/tv_TelaCambio_SdCaixa"
+     android:layout_width="327dp"
+     android:layout_height="27dp"
+     android:layout_margin="24dp"
+     android:text="7 Dollar em Caixa "
+     android:textSize="24sp"
+     android:textColor="@color/white"
+     app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SdDisponivel"
+     app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SdDisponivel"
+     app:layout_constraintTop_toBottomOf="@+id/tv_TelaCambio_SdDisponivel" />
+
+ <com.google.android.material.textfield.TextInputEditText
+     android:id="@+id/etxt_TelaCambio_QuantidadeMoeda"
+     android:layout_width="327dp"
+     android:layout_height="54dp"
+     android:layout_margin="24dp"
+     android:background="@drawable/shape_edittext"
+     android:hint="Quantidade"
+     android:selectAllOnFocus="true"
+     android:singleLine="true"
+     android:textColorHint="@color/grey"
+     app:layout_constraintBottom_toTopOf="@+id/btn_TelaCambio_Vender"
+     app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SdCaixa"
+     app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SdCaixa"
+     app:layout_constraintTop_toBottomOf="@+id/tv_TelaCambio_SdCaixa"
+     app:layout_constraintVertical_bias="0.040" />
+
+ <androidx.appcompat.widget.AppCompatButton
+     android:id="@+id/btn_TelaCambio_Vender"
+     android:layout_width="151dp"
+     android:layout_height="43dp"
+     android:layout_margin="24dp"
+     android:layout_marginStart="24dp"
+     android:background="@drawable/shape_botao"
+     android:fontFamily="@font/arial"
+     android:gravity="center"
+     android:onClick="calcularVendaMoeda"
+     android:text="VENDER"
+     android:textColor="@color/white"
+     android:textSize="24sp"
+     android:textStyle="bold"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintStart_toStartOf="parent" />
+
+ <androidx.appcompat.widget.AppCompatButton
+     android:id="@+id/btn_TelaCambio_Comprar"
+     android:layout_width="151dp"
+     android:layout_height="43dp"
+     android:layout_margin="24dp"
+     android:layout_marginEnd="24dp"
+     android:background="@drawable/shape_botao"
+     android:fontFamily="@font/arial"
+     android:gravity="center"
+     android:text="COMPRAR"
+     android:textColor="@color/white"
+     android:textSize="24sp"
+     android:textStyle="bold"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent" />
+
+ <androidx.appcompat.widget.AppCompatButton
+     android:id="@+id/btn_TelaCambio_Voltar"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginEnd="234dp"
+     android:layout_marginStart="9dp"
+     android:drawableLeft="@drawable/ic_baseline_voltar"
+     android:background="@color/black"
+     android:text="Moedas"
+     android:textSize="17sp"
+     android:textAllCaps="false"
+     android:fontFamily="@font/helvetica"
+     android:textColor="@color/white"
+     app:layout_constraintBottom_toBottomOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintEnd_toEndOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintHorizontal_bias="0.062"
+     app:layout_constraintStart_toStartOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintTop_toTopOf="@+id/include_toolbar_TelaCambio"
+     />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
