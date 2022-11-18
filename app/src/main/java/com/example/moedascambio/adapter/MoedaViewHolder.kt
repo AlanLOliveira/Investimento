@@ -6,7 +6,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moedascambio.R
 import com.example.moedascambio.model.MoedaModel
-import java.text.DecimalFormat
+import java.math.RoundingMode
+
 
 class MoedaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //dados para o adapter
@@ -24,11 +25,18 @@ class MoedaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }else{
             tv_PorcentMoeda.setTextColor(Color.WHITE)
         }
-        val formatarItem = DecimalFormat("#.##")
-            tv_PorcentMoeda.text = formatarItem.format(moedaModel.variacao_moeda).toString() +  "%"
+        tv_PorcentMoeda.text = buildString {
+        append((moedaModel.variacao_moeda).toString().toBigDecimal().setScale(2,RoundingMode.UP))
+        append("%")
+    }
+        acessibilidadeMoeda()
+    }
 
-
-
+    fun acessibilidadeMoeda(){
+        tv_Moeda.let { tvMoeda->
+            tvMoeda.contentDescription = "A variação da moeda ${tvMoeda.text} é de "
+            
+        }
     }
 
 

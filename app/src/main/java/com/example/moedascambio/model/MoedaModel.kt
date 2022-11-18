@@ -12,11 +12,14 @@ data class MoedaModel(
     val variacao_moeda: Double? = null,
 
     @SerializedName("buy")
-    val valor_compra: Double? = null,
+    val valor_compra: Double = 0.0,
 
     @SerializedName("sell")
-    val valor_venda: Double? = null,
+    val valor_venda: Double = 0.0,
     var isoMoeda: String = ""
 
+
 ) : Serializable
+
+
 

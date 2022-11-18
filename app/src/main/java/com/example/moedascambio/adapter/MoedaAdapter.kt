@@ -26,11 +26,13 @@ class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = listaDeMoedas.size
 
+
     fun refresh(newList: List<MoedaModel?>) {
+
 
         listaDeMoedas.clear()
         listaDeMoedas.addAll(newList)
-        notifyDataSetChanged()
+
     }
 
 }

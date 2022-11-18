@@ -6,14 +6,13 @@ import com.example.moedascambio.repository.RepositorioMoeda
 import com.example.moedascambio.viewmodel.MoedaViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class TesteMoedaViewModel : BaseTest() {
 
-    var api = mockk <RepositorioMoeda>(relaxUnitFun = true)
-    var viewModel : MoedaViewModel = MoedaViewModel(api)
+    private var api = mockk <RepositorioMoeda>(relaxUnitFun = true)
+    private var viewModel : MoedaViewModel = MoedaViewModel(api)
 
     @Test
 
@@ -41,7 +40,7 @@ class TesteMoedaViewModel : BaseTest() {
         )
         coEvery { api.lerMoedas() } returns resultado
         viewModel.atualizaMoedas()
-        Assert.assertEquals(resultListaTeste, viewModel.listaDeMoedas.value)
+        assertEquals(resultListaTeste, viewModel.listaDeMoedas.value)
     }
 
     @Test

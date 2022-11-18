@@ -1,5 +1,6 @@
 package com.example.moedascambio.viewmodel
 
+
 import androidx.lifecycle.MutableLiveData
 import com.example.moedascambio.model.MoedaModel
 import com.example.moedascambio.repository.RepositorioMoeda
@@ -15,7 +16,7 @@ class MoedaViewModel (private val repositorioMoeda: RepositorioMoeda): BaseViewM
     fun atualizaMoedas() {
         launch {
             try {
-                //val moedaService = MoedaRetrofit().moedaRetrofitInstance()
+
                 val call = repositorioMoeda.lerMoedas()
                 val listaTodasAsMoedas = mapeiaNome(
                     listOfNotNull(
@@ -39,25 +40,28 @@ class MoedaViewModel (private val repositorioMoeda: RepositorioMoeda): BaseViewM
                 errorTest.postValue("Ops, ocorreu um erro")
             }
         }
+
     }
-    fun mapeiaNome(moedas: List<MoedaModel?>): List<MoedaModel?> {
+    private fun mapeiaNome(moedas: List<MoedaModel?>): List<MoedaModel?> {
         return moedas.map {
             it?.apply {
                 it.isoMoeda =
                     when (it.nome_moeda) {
                         "Dollar" -> "USD"
                         "Euro" -> "EUR"
-                        "Pound Sterling" -> "GBP"
                         "Argentine Peso" -> "ARS"
                         "Canadian Dollar" -> "CAD"
+                        "Pound Sterling" -> "GBP"
                         "Australian Dollar" -> "AUD"
                         "Japanese Yen" -> "JPY"
                         "Renminbi" -> "CNY"
                         "Bitcoin" -> "BTC"
                         else -> ""
-                    }
+                   }
             }
         }
     }
+
+
 
 }

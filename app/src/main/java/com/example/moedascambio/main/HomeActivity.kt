@@ -11,12 +11,12 @@ import com.example.moedascambio.R
 import com.example.moedascambio.adapter.MoedaAdapter
 import com.example.moedascambio.repository.RepositorioMoeda
 import com.example.moedascambio.viewmodel.MoedaViewModel
-import com.example.moedascambio.viewmodel.ViewModelIF
+import com.example.moedascambio.viewmodel.ViewModelIFactory
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var rvMoedas: RecyclerView
-    lateinit var moedaViewModel: MoedaViewModel
+    private lateinit var rvMoedas: RecyclerView
+    private lateinit var moedaViewModel: MoedaViewModel
     private val moedaAdapter by lazy {
         MoedaAdapter()
     }
@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
 
 // Instancia viewmodel com a lista
 
-        moedaViewModel = ViewModelProvider(this, ViewModelIF(RepositorioMoeda()))[MoedaViewModel::class.java]
+        moedaViewModel = ViewModelProvider(this, ViewModelIFactory(RepositorioMoeda()))[MoedaViewModel::class.java]
         moedaViewModel.listaDeMoedas.observe(this) {
             moedaAdapter.refresh(it)
 

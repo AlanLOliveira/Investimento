@@ -7,7 +7,7 @@ import com.example.moedascambio.service.MoedaRetrofit
 
 class RepositorioMoeda {
 
-    val services = MoedaRetrofit().moedaRetrofitInstance()
+    private val services = MoedaRetrofit().moedaRetrofitInstance()
 
     suspend fun lerMoedas(): MoedaDataModel {
         return services.buscarMoedas()
