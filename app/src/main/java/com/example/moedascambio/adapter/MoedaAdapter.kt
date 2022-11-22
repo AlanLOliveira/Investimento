@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moedascambio.R
 import com.example.moedascambio.model.MoedaModel
-//criar configuração da lista de moeda - layout - click
+
 class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapter<MoedaViewHolder>() {
     private val listaDeMoedas = mutableListOf<MoedaModel?>()
 
@@ -23,15 +23,12 @@ class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapte
         }
 
     }
-
     override fun getItemCount(): Int = listaDeMoedas.size
 
-
     fun refresh(newList: List<MoedaModel?>) {
-
-
         listaDeMoedas.clear()
         listaDeMoedas.addAll(newList)
+
 
     }
 

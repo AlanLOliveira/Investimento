@@ -11,11 +11,9 @@ import java.math.RoundingMode
 
 class CompraVendaMoedas : AppCompatActivity() {
 
-
-
-    private lateinit var tvTelaCompraVendaDetalhes: TextView
-    private lateinit var btnTelaCompraVendaVoltarHome: Button
-    private lateinit var btnTelaCompraVendaVoltarCambio: Button
+    private lateinit var tvCompraVendaDetalhes: TextView
+    private lateinit var btnCompraVendaVoltarHome: Button
+    private lateinit var btnCompraVendaVoltarCambio: Button
     private var trazerDadosMoeda : MoedaModel? = null
     private lateinit var tituloToolbar: TextView
 
@@ -24,15 +22,14 @@ class CompraVendaMoedas : AppCompatActivity() {
         setContentView(R.layout.tela_compra_venda_moedas)
 
         inicializaComponentes()
-        btnTelaCompraVendaVoltarHome()
+        btnCompraVendaVoltarHome()
 
         trazerDadosMoeda = intent.getSerializableExtra("cambio") as MoedaModel
         trazerDadosMoeda?.let {
             escolherVendaOuCompra(it)
-            btnTelaCompraVendaVoltarCambio()
+            btnCompraVendaVoltarCambio()
         }
-
-   }
+  }
 
     private fun escolherVendaOuCompra(moeda: MoedaModel){
         val compra = intent.getBooleanExtra("compra", false)
@@ -42,13 +39,13 @@ class CompraVendaMoedas : AppCompatActivity() {
 
         if (compra) {
             tituloToolbar.text = getString(R.string.comprar)
-            tvTelaCompraVendaDetalhes.text = buildString {
+            tvCompraVendaDetalhes.text = buildString {
                 append("Parabéns!\n Você acabou de comprar \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
                 append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
             }
         } else if (venda) {
             tituloToolbar.text = getString(R.string.vender)
-            tvTelaCompraVendaDetalhes.text =
+            tvCompraVendaDetalhes.text =
                 buildString {
                     append("Parabéns!\n Você acabou de vender \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
                     append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
@@ -57,21 +54,21 @@ class CompraVendaMoedas : AppCompatActivity() {
     }
 
     private fun inicializaComponentes() {
-        tvTelaCompraVendaDetalhes = findViewById(R.id.tv_TelaCompraVenda_Resultado)
-        btnTelaCompraVendaVoltarHome = findViewById(R.id.btn_TelaCompraVenda_Home)
-        btnTelaCompraVendaVoltarCambio = findViewById(R.id.btn_TelaCompraVenda_VoltarCambio)
+        tvCompraVendaDetalhes = findViewById(R.id.tv_TelaCompraVenda_Resultado)
+        btnCompraVendaVoltarHome = findViewById(R.id.btn_CompraVenda_Home)
+        btnCompraVendaVoltarCambio = findViewById(R.id.btn_CompraVenda_VoltarCambio)
         tituloToolbar = findViewById(R.id.toolbar_title_cambio)
     }
 
-    private fun btnTelaCompraVendaVoltarHome() {
-        btnTelaCompraVendaVoltarHome.setOnClickListener {
+    private fun btnCompraVendaVoltarHome() {
+        btnCompraVendaVoltarHome.setOnClickListener {
             intent = Intent(this, HomeActivity::class.java)
             finish()
             startActivity(intent)
         }
     }
-    private fun btnTelaCompraVendaVoltarCambio() {
-        btnTelaCompraVendaVoltarCambio.setOnClickListener {
+    private fun btnCompraVendaVoltarCambio() {
+        btnCompraVendaVoltarCambio.setOnClickListener {
                     finish()
             }
         }

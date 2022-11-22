@@ -5,7 +5,7 @@
     android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.TelaDeCambio">
+    tools:context=".main.Cambio">
 
  <include
      android:id="@+id/include_toolbar_TelaCambio"
@@ -29,7 +29,7 @@
      app:layout_constraintVertical_bias="0.0">
 
   <TextView
-      android:id="@+id/tv_TelaCambio_SiglaEMoeda"
+      android:id="@+id/tv_Cambio_SiglaEMoeda"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"
@@ -43,7 +43,7 @@
       app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-      android:id="@+id/tv_TelaCambio_Variacao"
+      android:id="@+id/tv_Cambio_Variacao"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"
@@ -51,12 +51,12 @@
       android:importantForAccessibility="yes"
       android:textColor="@color/green"
       android:textSize="20sp"
-      app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SiglaEMoeda"
-      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SiglaEMoeda"
-      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_SiglaEMoeda" />
+      app:layout_constraintEnd_toEndOf="@+id/tv_Cambio_SiglaEMoeda"
+      app:layout_constraintStart_toStartOf="@+id/tv_Cambio_SiglaEMoeda"
+      app:layout_constraintTop_toBottomOf="@id/tv_Cambio_SiglaEMoeda" />
 
   <TextView
-      android:id="@+id/tv_TelaCambio_ValorCompra"
+      android:id="@+id/tv_Cambio_ValorCompra"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"
@@ -65,13 +65,13 @@
       android:padding="8dp"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_Variacao"
-      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_Variacao"
+      app:layout_constraintStart_toStartOf="@+id/tv_Cambio_Variacao"
+      app:layout_constraintTop_toBottomOf="@id/tv_Cambio_Variacao"
 
       />
 
   <TextView
-      android:id="@+id/tv_TelaCambio_ValorVenda"
+      android:id="@+id/tv_Cambio_ValorVenda"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
@@ -80,13 +80,13 @@
       android:textColor="@color/white"
       android:textSize="16sp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_ValorCompra"
-      app:layout_constraintTop_toBottomOf="@id/tv_TelaCambio_ValorCompra" />
+      app:layout_constraintStart_toStartOf="@+id/tv_Cambio_ValorCompra"
+      app:layout_constraintTop_toBottomOf="@id/tv_Cambio_ValorCompra" />
 
  </LinearLayout>
 
  <TextView
-     android:id="@+id/tv_TelaCambio_SdDisponivel"
+     android:id="@+id/tv_Cambio_SdDisponivel"
      android:layout_width="327dp"
      android:layout_height="27dp"
      android:layout_margin="24dp"
@@ -99,7 +99,7 @@
      app:layout_constraintTop_toBottomOf="@+id/linearLayout_TelaCambio" />
 
  <TextView
-     android:id="@+id/tv_TelaCambio_SdCaixa"
+     android:id="@+id/tv_Cambio_SdCaixa"
      android:layout_width="327dp"
      android:layout_height="27dp"
      android:layout_margin="24dp"
@@ -107,12 +107,12 @@
      android:importantForAccessibility="yes"
      android:textSize="24sp"
      android:textColor="@color/white"
-     app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SdDisponivel"
-     app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SdDisponivel"
-     app:layout_constraintTop_toBottomOf="@+id/tv_TelaCambio_SdDisponivel" />
+     app:layout_constraintEnd_toEndOf="@+id/tv_Cambio_SdDisponivel"
+     app:layout_constraintStart_toStartOf="@+id/tv_Cambio_SdDisponivel"
+     app:layout_constraintTop_toBottomOf="@+id/tv_Cambio_SdDisponivel" />
 
  <com.google.android.material.textfield.TextInputEditText
-     android:id="@+id/etxt_TelaCambio_QuantidadeMoeda"
+     android:id="@+id/etxt_Cambio_QuantidadeMoeda"
      android:layout_width="327dp"
      android:layout_height="54dp"
      android:layout_margin="24dp"
@@ -121,14 +121,14 @@
      android:textColor="@color/grey"
      android:inputType="number"
      android:textColorHint="@color/grey"
-     app:layout_constraintBottom_toTopOf="@+id/btn_TelaCompraVenda_Home"
-     app:layout_constraintEnd_toEndOf="@+id/tv_TelaCambio_SdCaixa"
-     app:layout_constraintStart_toStartOf="@+id/tv_TelaCambio_SdCaixa"
-     app:layout_constraintTop_toBottomOf="@+id/tv_TelaCambio_SdCaixa"
+     app:layout_constraintBottom_toTopOf="@+id/btn_CompraVenda_Home"
+     app:layout_constraintEnd_toEndOf="@+id/tv_Cambio_SdCaixa"
+     app:layout_constraintStart_toStartOf="@+id/tv_Cambio_SdCaixa"
+     app:layout_constraintTop_toBottomOf="@+id/tv_Cambio_SdCaixa"
      app:layout_constraintVertical_bias="0.040" />
 
  <androidx.appcompat.widget.AppCompatButton
-     android:id="@+id/btn_TelaCompraVenda_Home"
+     android:id="@+id/btn_CompraVenda_Home"
      android:layout_width="151dp"
      android:layout_height="48dp"
      android:layout_margin="24dp"
@@ -147,7 +147,7 @@
      app:layout_constraintStart_toStartOf="parent" />
 
  <androidx.appcompat.widget.AppCompatButton
-     android:id="@+id/btn_TelaCambio_Comprar"
+     android:id="@+id/btn_Cambio_Comprar"
      android:layout_width="151dp"
      android:layout_height="48dp"
      android:layout_margin="24dp"
@@ -163,7 +163,7 @@
      app:layout_constraintEnd_toEndOf="parent" />
 
  <androidx.appcompat.widget.AppCompatButton
-     android:id="@+id/btn_TelaCompraVenda_VoltarCambio"
+     android:id="@+id/btn_CompraVenda_VoltarCambio"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_marginEnd="234dp"

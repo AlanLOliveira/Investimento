@@ -2,6 +2,7 @@ package com.example.moedascambio.viewmodel
 
 
 import androidx.lifecycle.MutableLiveData
+import com.example.moedascambio.Utils.mapeiaNome
 import com.example.moedascambio.model.MoedaModel
 import com.example.moedascambio.repository.RepositorioMoeda
 
@@ -41,25 +42,6 @@ class MoedaViewModel (private val repositorioMoeda: RepositorioMoeda): BaseViewM
             }
         }
 
-    }
-    private fun mapeiaNome(moedas: List<MoedaModel?>): List<MoedaModel?> {
-        return moedas.map {
-            it?.apply {
-                it.isoMoeda =
-                    when (it.nome_moeda) {
-                        "Dollar" -> "USD"
-                        "Euro" -> "EUR"
-                        "Argentine Peso" -> "ARS"
-                        "Canadian Dollar" -> "CAD"
-                        "Pound Sterling" -> "GBP"
-                        "Australian Dollar" -> "AUD"
-                        "Japanese Yen" -> "JPY"
-                        "Renminbi" -> "CNY"
-                        "Bitcoin" -> "BTC"
-                        else -> ""
-                   }
-            }
-        }
     }
 
 

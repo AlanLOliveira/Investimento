@@ -26,23 +26,31 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
+        inicializaViewModel()
+        sincronizaDadosMoedas()
+        mensagemDeErro()
+    }
 
-// Instancia viewmodel com a lista
-
-        moedaViewModel = ViewModelProvider(this, ViewModelIFactory(RepositorioMoeda()))[MoedaViewModel::class.java]
-        moedaViewModel.listaDeMoedas.observe(this) {
-            moedaAdapter.refresh(it)
-
-            configuraRecyclerView()
-
-        }
-        //atualizar as moedas
-        moedaViewModel.atualizaMoedas()
-
+    private fun mensagemDeErro() {
         moedaViewModel.errorTest.observe(this) {
             Toast.makeText(applicationContext, it, Toast.LENGTH_LONG).show()
         }
+    }
 
+    private fun sincronizaDadosMoedas() {
+        moedaViewModel.listaDeMoedas.observe(this) {
+            moedaAdapter.refresh(it)
+            configuraRecyclerView()
+        }
+        //atualizar as moedas
+        moedaViewModel.atualizaMoedas()
+    }
+
+    private fun inicializaViewModel() {
+        moedaViewModel = ViewModelProvider(
+            this,
+            ViewModelIFactory(RepositorioMoeda())
+        )[MoedaViewModel::class.java]
     }
 
     private fun configuraRecyclerView() {
@@ -50,15 +58,13 @@ class HomeActivity : AppCompatActivity() {
         rvMoedas.layoutManager = LinearLayoutManager(this)
         rvMoedas.adapter = moedaAdapter
         moedaAdapter.onclick = {
-            Intent(this, TelaDeCambio::class.java).apply {
+            Intent(this, Cambio::class.java).apply {
                 putExtra("cambio", it)
                 startActivity(this)
             }
         }
 
     }
-
-
 }
 
 

@@ -23,7 +23,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.TelaDeCambio"
+            android:name=".main.Cambio"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
