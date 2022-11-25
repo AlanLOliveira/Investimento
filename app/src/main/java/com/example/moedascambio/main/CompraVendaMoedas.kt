@@ -14,7 +14,7 @@ class CompraVendaMoedas : AppCompatActivity() {
     private lateinit var tvCompraVendaDetalhes: TextView
     private lateinit var btnCompraVendaVoltarHome: Button
     private lateinit var btnCompraVendaVoltarCambio: Button
-    private var trazerDadosMoeda : MoedaModel? = null
+    private var trazerDadosMoeda: MoedaModel? = null
     private lateinit var tituloToolbar: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,27 +23,39 @@ class CompraVendaMoedas : AppCompatActivity() {
 
         inicializaComponentes()
         btnCompraVendaVoltarHome()
+        retornaResultadoDaMoeda()
+    }
 
+    private fun retornaResultadoDaMoeda() {
         trazerDadosMoeda = intent.getSerializableExtra("cambio") as MoedaModel
         trazerDadosMoeda?.let {
-            escolherVendaOuCompra(it)
+            recebeInfoVendaOuCompra(it)
             btnCompraVendaVoltarCambio()
         }
-  }
+    }
 
-    private fun escolherVendaOuCompra(moeda: MoedaModel){
-        val compra = intent.getBooleanExtra("compra", false)
-        val venda = intent.getBooleanExtra("venda", false)
+    private fun recebeInfoVendaOuCompra(moeda: MoedaModel) {
+        val operacao = intent.getStringExtra("operacao")
         val quantidadeMoeda = intent.getIntExtra("quantidade", 0)
         val resultado = intent.getDoubleExtra("resultado", 0.0)
 
-        if (compra) {
+        configuraExibicaoCompraOuVenda(operacao, quantidadeMoeda, moeda, resultado)
+    }
+
+    private fun configuraExibicaoCompraOuVenda(
+        operacao: String?,
+        quantidadeMoeda: Int,
+        moeda: MoedaModel,
+        resultado: Double,
+        ) {
+
+        if (operacao == "compra") {
             tituloToolbar.text = getString(R.string.comprar)
             tvCompraVendaDetalhes.text = buildString {
                 append("Parabéns!\n Você acabou de comprar \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
                 append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
             }
-        } else if (venda) {
+        } else if (operacao == "venda") {
             tituloToolbar.text = getString(R.string.vender)
             tvCompraVendaDetalhes.text =
                 buildString {
@@ -54,7 +66,7 @@ class CompraVendaMoedas : AppCompatActivity() {
     }
 
     private fun inicializaComponentes() {
-        tvCompraVendaDetalhes = findViewById(R.id.tv_TelaCompraVenda_Resultado)
+        tvCompraVendaDetalhes = findViewById(R.id.tv_CompraVenda_Resultado)
         btnCompraVendaVoltarHome = findViewById(R.id.btn_CompraVenda_Home)
         btnCompraVendaVoltarCambio = findViewById(R.id.btn_CompraVenda_VoltarCambio)
         tituloToolbar = findViewById(R.id.toolbar_title_cambio)
@@ -67,13 +79,12 @@ class CompraVendaMoedas : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun btnCompraVendaVoltarCambio() {
         btnCompraVendaVoltarCambio.setOnClickListener {
-                    finish()
-            }
+            finish()
         }
-
-
+    }
 }
 
 

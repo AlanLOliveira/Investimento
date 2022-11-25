@@ -16,7 +16,7 @@ class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MoedaViewHolder, position: Int) {
         listaDeMoedas[position]?.let { preencherMoeda ->
-            holder.preencher(preencherMoeda)
+            holder.preencherTituloMoeda(preencherMoeda)
             holder.itemView.setOnClickListener {
                 onclick.invoke(preencherMoeda)
             }
@@ -25,7 +25,7 @@ class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapte
     }
     override fun getItemCount(): Int = listaDeMoedas.size
 
-    fun refresh(newList: List<MoedaModel?>) {
+    fun atualizar(newList: List<MoedaModel?>) {
         listaDeMoedas.clear()
         listaDeMoedas.addAll(newList)
 

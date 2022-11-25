@@ -9,7 +9,7 @@ data class MoedaModel(
     val nome_moeda : String? = null,
 
     @SerializedName("variation")
-    val variacao_moeda: Double? = null,
+    val variacao_moeda: Double = 0.0,
 
     @SerializedName("buy")
     val valor_compra: Double = 0.0,

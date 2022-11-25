@@ -37,7 +37,7 @@
          />
 
     <TextView
-        android:id="@+id/tv_TelaCompraVenda_Resultado"
+        android:id="@+id/tv_CompraVenda_Resultado"
         android:layout_width="330dp"
         android:layout_height="200dp"
         android:textColor="@color/green"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_TelaCompraVenda_Resultado"
+        app:layout_constraintTop_toBottomOf="@+id/tv_CompraVenda_Resultado"
         app:layout_constraintVertical_bias="0.8"
         app:layout_editor_absoluteX="112dp"
         app:layout_editor_absoluteY="584dp" />

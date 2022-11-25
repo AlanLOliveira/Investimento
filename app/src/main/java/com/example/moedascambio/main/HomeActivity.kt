@@ -21,7 +21,6 @@ class HomeActivity : AppCompatActivity() {
         MoedaAdapter()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
@@ -39,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun sincronizaDadosMoedas() {
         moedaViewModel.listaDeMoedas.observe(this) {
-            moedaAdapter.refresh(it)
+            moedaAdapter.atualizar(it)
             configuraRecyclerView()
         }
         //atualizar as moedas
@@ -57,13 +56,16 @@ class HomeActivity : AppCompatActivity() {
         rvMoedas = findViewById(R.id.rv_Moedas)
         rvMoedas.layoutManager = LinearLayoutManager(this)
         rvMoedas.adapter = moedaAdapter
+        configuraCliqueDoCard()
+
+    }
+    private fun configuraCliqueDoCard() {
         moedaAdapter.onclick = {
             Intent(this, Cambio::class.java).apply {
                 putExtra("cambio", it)
                 startActivity(this)
             }
         }
-
     }
 }
 

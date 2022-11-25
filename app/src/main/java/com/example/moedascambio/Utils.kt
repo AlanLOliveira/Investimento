@@ -28,13 +28,13 @@ object Utils {
    fun alteraCorDaVariacaoDaMoeda(moedaModel: MoedaModel, tvPorcentagemDaMoeda: TextView ){
      val variacaoDaMoeda = moedaModel.variacao_moeda
      val cor: String
-     if(variacaoDaMoeda != null){
-         cor = when {
-             variacaoDaMoeda < 0 -> "#D0021B"
-             variacaoDaMoeda > 0 -> "#7ED321"
-             else -> "#FFFFFFFF"
-          }
-         tvPorcentagemDaMoeda.setTextColor(Color.parseColor(cor))
-     }
+       cor = when {
+           variacaoDaMoeda < 0 -> "#D0021B"
+           variacaoDaMoeda > 0 -> "#7ED321"
+           else -> "#FFFFFFFF"
+        }
+       tvPorcentagemDaMoeda.setTextColor(Color.parseColor(cor))
    }
+
+
 }

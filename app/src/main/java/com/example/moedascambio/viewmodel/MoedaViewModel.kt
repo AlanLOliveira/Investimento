@@ -17,7 +17,6 @@ class MoedaViewModel (private val repositorioMoeda: RepositorioMoeda): BaseViewM
     fun atualizaMoedas() {
         launch {
             try {
-
                 val call = repositorioMoeda.lerMoedas()
                 val listaTodasAsMoedas = mapeiaNome(
                     listOfNotNull(
@@ -31,12 +30,9 @@ class MoedaViewModel (private val repositorioMoeda: RepositorioMoeda): BaseViewM
                     call.currencies.JPY,
                     call.currencies.CNY,
                     call.currencies.BTC
-
                     )
                 )
-               // mapeiaNome(listaTodasAsMoedas)
-
-                listaDeMoedas.postValue(listaTodasAsMoedas)
+            listaDeMoedas.postValue(listaTodasAsMoedas)
             } catch (e: Exception) {
                 errorTest.postValue("Ops, ocorreu um erro")
             }

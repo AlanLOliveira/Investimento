@@ -1,6 +1,6 @@
 package com.example.moedascambio.model
 
-//Modelo as ser integrado fragmentado
+//Modelo as ser integrado
 import com.google.gson.annotations.SerializedName
 
 data class MoedaDataModel(
@@ -30,7 +30,6 @@ data class ResultData(
     var CNY: MoedaModel? = null,
     @SerializedName("BTC")
     var BTC: MoedaModel? = null
-
 )
 
 

@@ -13,7 +13,7 @@ class MoedaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvMoeda = itemView.findViewById<TextView>(R.id.textView_moeda_title)
     private val tvPorcentagemMoeda = itemView.findViewById<TextView>(R.id.textView_moeda_porcent)
 
-    fun preencher(moedaModel: MoedaModel) {
+    fun preencherTituloMoeda(moedaModel: MoedaModel) {
 
         tvMoeda.text = moedaModel.isoMoeda
         Utils.alteraCorDaVariacaoDaMoeda(moedaModel,tvPorcentagemMoeda )
@@ -27,8 +27,7 @@ class MoedaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private fun acessibilidadeMoeda(){
         tvMoeda.let { tvMoeda->
             tvMoeda.contentDescription = "A variação da moeda ${tvMoeda.text} é de "
-            
-        }
+       }
     }
 
 
