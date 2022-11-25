@@ -45,11 +45,9 @@ class Cambio : AppCompatActivity() {
     private fun setOnClickListenner() {
         btnCambioComprar.setOnClickListener {
             btnCalcularCompraMoeda()
-
         }
         btnCambioVender.setOnClickListener {
             btnCalcularVendaMoeda()
-
         }
     }
 
@@ -69,13 +67,13 @@ class Cambio : AppCompatActivity() {
         moedaModel = intent.getSerializableExtra("cambio") as? MoedaModel
         moedaModel?.let {
 
-            preencherDadosTelaCambio(it)
+            preencherCamposNaTelaCambio(it)
             alteraCorDaVariacaoDaMoeda(moedaModel = it, tvCambioVariacaoDaMoeda)
-            excecucaoBtnVendaECompra(moedaModel = it)
+            execucaoBtnVendaECompra(moedaModel = it)
         }
     }
 
-    private fun preencherDadosTelaCambio(it: MoedaModel) {
+    private fun preencherCamposNaTelaCambio(it: MoedaModel) {
         if (moedaModel?.totalsaldocaixa == 0) {
             buscaValorSimulado(it)
         }
@@ -127,6 +125,11 @@ class Cambio : AppCompatActivity() {
         moedaModel?.let { modificaValorPosOperacao(it) }
     }
 
+    private fun btnCalcularCompraMoeda() {
+        calculaCompraDaMoeda()
+        moedaModel?.let { modificaValorPosOperacao(it) }
+    }
+    
     private fun calculaVendaDaMoeda() {
         val valorVendaMoeda = moedaModel?.valor_venda.toString().toDouble()
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
@@ -138,12 +141,6 @@ class Cambio : AppCompatActivity() {
         }
         enviarDadosCompraEVendaMoedas("venda")
     }
-
-    private fun btnCalcularCompraMoeda() {
-        calculaCompraDaMoeda()
-        moedaModel?.let { modificaValorPosOperacao(it) }
-    }
-
     private fun calculaCompraDaMoeda() {
         val valorCompraMoeda = moedaModel?.valor_compra.toString().toDouble()
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
@@ -154,43 +151,8 @@ class Cambio : AppCompatActivity() {
         }
         enviarDadosCompraEVendaMoedas("compra")
     }
-
-    private fun btnCorAtivadoOuDesativado(boolean: Boolean, btnAtivarDesativar: Button) {
-        btnAtivarDesativar.isEnabled = boolean
-        if (boolean) {
-            btnAtivarDesativar.alpha = 1F
-        } else {
-            btnAtivarDesativar.alpha = 0.5F
-        }
-    }
-
-    private fun validaFuncaoAtivarBtnVenda(
-        moedaModel: MoedaModel,
-        ativarbtn: Int,
-    ) {
-        if (moedaModel.valor_venda != 0.0) {
-            if (ativarbtn <= moedaModel.totalsaldocaixa) {
-                btnCorAtivadoOuDesativado(boolean = true, btnCambioVender)
-            } else {
-                btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
-            }
-        }
-    }
-
-    private fun validaFuncaoAtivarBtnCompra(
-        moedaModel: MoedaModel,
-        ativarbtn: Int,
-    ) {
-        if (moedaModel.valor_compra != 0.0) {
-            if (ativarbtn * moedaModel.valor_compra <= totalsaldodisnponivel) {
-                btnCorAtivadoOuDesativado(boolean = true, btnCambioComprar)
-            } else {
-                btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
-            }
-        }
-    }
-
-    private fun excecucaoBtnVendaECompra(moedaModel: MoedaModel) {
+    
+    private fun execucaoBtnVendaECompra(moedaModel: MoedaModel) {
         etxtCambioQuanditaDeMoeda.doOnTextChanged { text, _, _, _ ->
             if (text.toString().isNotBlank()) {
                 val ativarbtn = text.toString().toInt()
@@ -206,6 +168,40 @@ class Cambio : AppCompatActivity() {
         }
     }
 
+    private fun validaFuncaoAtivarBtnVenda(
+        moedaModel: MoedaModel,
+        ativarbtn: Int,
+    ) {
+        if (moedaModel.valor_venda != 0.0) {
+            if (ativarbtn <= moedaModel.totalsaldocaixa) {
+                btnCorAtivadoOuDesativado(boolean = true, btnCambioVender)
+            } else {
+                btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
+            }
+        }
+    }
+    private fun validaFuncaoAtivarBtnCompra(
+        moedaModel: MoedaModel,
+        ativarbtn: Int,
+    ) {
+        if (moedaModel.valor_compra != 0.0) {
+            if (ativarbtn * moedaModel.valor_compra <= totalsaldodisnponivel) {
+                btnCorAtivadoOuDesativado(boolean = true, btnCambioComprar)
+            } else {
+                btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
+            }
+        }
+    }
+   
+    private fun btnCorAtivadoOuDesativado(boolean: Boolean, btnAtivarDesativar: Button) {
+        btnAtivarDesativar.isEnabled = boolean
+        if (boolean) {
+            btnAtivarDesativar.alpha = 1F
+        } else {
+            btnAtivarDesativar.alpha = 0.5F
+        }
+    }
+
     private fun enviarDadosCompraEVendaMoedas(operacao: String) {
         val infoMoedas = Intent(this, CompraVendaMoedas::class.java)
         infoMoedas.putExtra("operacao", operacao)
@@ -214,6 +210,5 @@ class Cambio : AppCompatActivity() {
         infoMoedas.putExtra("cambio", moedaModel)
         startActivity(infoMoedas)
     }
-
 
 }

@@ -138,7 +138,6 @@
      android:gravity="center"
      android:importantForAccessibility="yes"
      android:maxLength="6"
-
      android:text="@string/vender"
      android:textColor="@color/white"
      android:textSize="24sp"

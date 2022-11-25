@@ -41,8 +41,7 @@ class HomeActivity : AppCompatActivity() {
             moedaAdapter.atualizar(it)
             configuraRecyclerView()
         }
-        //atualizar as moedas
-        moedaViewModel.atualizaMoedas()
+          moedaViewModel.atualizaMoedas()
     }
 
     private fun inicializaViewModel() {
