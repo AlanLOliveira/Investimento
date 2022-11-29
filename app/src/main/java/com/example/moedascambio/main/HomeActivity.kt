@@ -25,6 +25,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
+        val moedaToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(moedaToolbar)
+
+
+
         inicializaViewModel()
         sincronizaDadosMoedas()
         mensagemDeErro()

@@ -14,10 +14,14 @@ import com.example.moedascambio.SingletonSimulandoValores.totalsaldodisnponivel
 import com.example.moedascambio.Utils.alteraCorDaVariacaoDaMoeda
 import com.example.moedascambio.model.MoedaModel
 import java.math.RoundingMode
+import java.text.NumberFormat
+import java.util.*
+
 
 class Cambio : AppCompatActivity() {
 
     private var moedaModel: MoedaModel? = null
+    private lateinit var tvToolbar : TextView
     private lateinit var tvCambioSiglaEMoeda: TextView
     private lateinit var tvCambioVariacaoDaMoeda: TextView
     private lateinit var tvCambioValorCompraMoeda: TextView
@@ -30,10 +34,14 @@ class Cambio : AppCompatActivity() {
     private lateinit var etxtCambioQuanditaDeMoeda: EditText
     private var quantidadeMoeda: Int = 0
     private var resultado: Double = 0.0
+     val brasil = Locale("pt", "BR")
+     val br : NumberFormat = NumberFormat.getCurrencyInstance(brasil)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_de_cambio)
+
 
         inicializaComponentes()
         btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
@@ -66,7 +74,7 @@ class Cambio : AppCompatActivity() {
     private fun trazInformacaoMoedaParaTelaDeCambio() {
         moedaModel = intent.getSerializableExtra("cambio") as? MoedaModel
         moedaModel?.let {
-
+            tvToolbar.text = getString(R.string.cambio)
             preencherCamposNaTelaCambio(it)
             alteraCorDaVariacaoDaMoeda(moedaModel = it, tvCambioVariacaoDaMoeda)
             execucaoBtnVendaECompra(moedaModel = it)
@@ -74,6 +82,8 @@ class Cambio : AppCompatActivity() {
     }
 
     private fun preencherCamposNaTelaCambio(it: MoedaModel) {
+
+
         if (moedaModel?.totalsaldocaixa == 0) {
             buscaValorSimulado(it)
         }
@@ -88,12 +98,10 @@ class Cambio : AppCompatActivity() {
             }
         tvCambioValorCompraMoeda.text =
             buildString {
-                append("Compra: " + "R$  " + (it.valor_compra).toString().toBigDecimal().setScale(2,
-                    RoundingMode.UP))
-            }
+                append("Compra: " +  br.format(it.valor_compra).toString())
+           }
         tvCambioValorVendaMoeda.text = buildString {
-            append("Venda: " + "R$  " + (it.valor_venda).toString().toBigDecimal()
-                .setScale(2, RoundingMode.UP))
+            append("Venda: " + br.format(it.valor_venda).toString())
         }
         tvCambioSaldoEmCaixa.text = buildString {
             append((moedaModel?.totalsaldocaixa))
@@ -102,9 +110,8 @@ class Cambio : AppCompatActivity() {
             append(" em caixa")
         }
         tvCamioSaldoDisponivel.text = buildString {
-            append("Saldo disponível: R$ " + ((totalsaldodisnponivel).toBigDecimal()
-                .setScale(2, RoundingMode.UP)))
-        }
+            append("Saldo disponível: " + br.format(totalsaldodisnponivel).toString())
+       }
     }
 
     private fun inicializaComponentes() {
@@ -118,6 +125,8 @@ class Cambio : AppCompatActivity() {
         etxtCambioQuanditaDeMoeda = findViewById(R.id.etxt_Cambio_QuantidadeMoeda)
         tvCamioSaldoDisponivel = findViewById(R.id.tv_Cambio_SdDisponivel)
         tvCambioSaldoEmCaixa = findViewById(R.id.tv_Cambio_SdCaixa)
+        tvToolbar = findViewById(R.id.tv_Toolbar)
+
     }
 
     private fun btnCalcularVendaMoeda() {

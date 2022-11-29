@@ -1,13 +1,14 @@
 package com.example.moedascambio.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.moedascambio.R
 import com.example.moedascambio.model.MoedaModel
-import java.math.RoundingMode
+import java.text.NumberFormat
+import java.util.*
 
 class CompraVendaMoedas : AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class CompraVendaMoedas : AppCompatActivity() {
     private lateinit var btnCompraVendaVoltarCambio: Button
     private var trazerDadosMoeda: MoedaModel? = null
     private lateinit var tituloToolbar: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +49,24 @@ class CompraVendaMoedas : AppCompatActivity() {
         quantidadeMoeda: Int,
         moeda: MoedaModel,
         resultado: Double,
+        brasil : Locale = Locale("pt", "BR"),
+        br : NumberFormat = NumberFormat.getCurrencyInstance(brasil)
+
         ) {
 
         if (operacao == "compra") {
             tituloToolbar.text = getString(R.string.comprar)
             tvCompraVendaDetalhes.text = buildString {
                 append("Parabéns!\n Você acabou de comprar \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
-                append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
+                append("\n${br.format(resultado)}")
+//
             }
         } else if (operacao == "venda") {
             tituloToolbar.text = getString(R.string.vender)
             tvCompraVendaDetalhes.text =
                 buildString {
                     append("Parabéns!\n Você acabou de vender \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
-                    append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
+                    append("\n${br.format(resultado)}")
                 }
         }
     }
@@ -69,7 +75,7 @@ class CompraVendaMoedas : AppCompatActivity() {
         tvCompraVendaDetalhes = findViewById(R.id.tv_CompraVenda_Resultado)
         btnCompraVendaVoltarHome = findViewById(R.id.btn_CompraVenda_Home)
         btnCompraVendaVoltarCambio = findViewById(R.id.btn_CompraVenda_VoltarCambio)
-        tituloToolbar = findViewById(R.id.toolbar_title_cambio)
+        tituloToolbar = findViewById(R.id.tv_Toolbar)
     }
 
     private fun btnCompraVendaVoltarHome() {

@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".main.Cambio">
 
+
  <include
-     android:id="@+id/include_toolbar_TelaCambio"
-     layout="@layout/toolbar_cambio"
+     android:id="@+id/toolbar"
+     layout="@layout/toolbar"
      tools:layout_editor_absoluteX="136dp"
      tools:layout_editor_absoluteY="0dp" />
 
@@ -25,7 +26,7 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintTop_toBottomOf="@+id/toolbar"
      app:layout_constraintVertical_bias="0.0">
 
   <TextView
@@ -175,11 +176,11 @@
      android:textAllCaps="false"
      android:fontFamily="@font/helvetica"
      android:textColor="@color/white"
-     app:layout_constraintBottom_toBottomOf="@+id/include_toolbar_TelaCambio"
-     app:layout_constraintEnd_toEndOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+     app:layout_constraintEnd_toEndOf="@+id/toolbar"
      app:layout_constraintHorizontal_bias="0.062"
-     app:layout_constraintStart_toStartOf="@+id/include_toolbar_TelaCambio"
-     app:layout_constraintTop_toTopOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintStart_toStartOf="@+id/toolbar"
+     app:layout_constraintTop_toTopOf="@+id/toolbar"
      />
 
 

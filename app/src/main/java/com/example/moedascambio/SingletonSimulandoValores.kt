@@ -2,6 +2,7 @@ package com.example.moedascambio
 
 import com.example.moedascambio.model.MoedaModel
 
+
 object SingletonSimulandoValores {
     var totalsaldodisnponivel : Double = 1000.00
 
