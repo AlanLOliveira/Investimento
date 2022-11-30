@@ -7,12 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".main.Cambio">
 
-
  <include
      android:id="@+id/toolbar"
      layout="@layout/toolbar"
      tools:layout_editor_absoluteX="136dp"
-     tools:layout_editor_absoluteY="0dp" />
+     tools:layout_editor_absoluteY="0dp"/>
 
  <LinearLayout
      android:id="@+id/linearLayout_TelaCambio"
@@ -162,26 +161,4 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent" />
 
- <androidx.appcompat.widget.AppCompatButton
-     android:id="@+id/btn_CompraVenda_VoltarCambio"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginEnd="234dp"
-     android:layout_marginStart="9dp"
-     android:importantForAccessibility="yes"
-     android:drawableStart="@drawable/ic_baseline_voltar"
-     android:background="@color/black"
-     android:text="@string/moedas"
-     android:textSize="17sp"
-     android:textAllCaps="false"
-     android:fontFamily="@font/helvetica"
-     android:textColor="@color/white"
-     app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-     app:layout_constraintEnd_toEndOf="@+id/toolbar"
-     app:layout_constraintHorizontal_bias="0.062"
-     app:layout_constraintStart_toStartOf="@+id/toolbar"
-     app:layout_constraintTop_toTopOf="@+id/toolbar"
-     />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>

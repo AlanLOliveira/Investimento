@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,14 +26,16 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
-        val moedaToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(moedaToolbar)
-
-
-
+        desativarVoltar()
         inicializaViewModel()
         sincronizaDadosMoedas()
         mensagemDeErro()
+    }
+
+    private fun desativarVoltar() {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar_Home)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun mensagemDeErro() {

@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import com.example.moedascambio.R
 import com.example.moedascambio.SingletonSimulandoValores.buscaValorSimulado
@@ -20,34 +21,38 @@ import java.util.*
 
 class Cambio : AppCompatActivity() {
 
+
     private var moedaModel: MoedaModel? = null
-    private lateinit var tvToolbar : TextView
+    private lateinit var tvToolbar: TextView
     private lateinit var tvCambioSiglaEMoeda: TextView
     private lateinit var tvCambioVariacaoDaMoeda: TextView
     private lateinit var tvCambioValorCompraMoeda: TextView
     private lateinit var tvCambioValorVendaMoeda: TextView
     private lateinit var tvCamioSaldoDisponivel: TextView
     private lateinit var tvCambioSaldoEmCaixa: TextView
-    private lateinit var btnCambioVoltarHome: Button
     private lateinit var btnCambioVender: Button
     private lateinit var btnCambioComprar: Button
     private lateinit var etxtCambioQuanditaDeMoeda: EditText
     private var quantidadeMoeda: Int = 0
     private var resultado: Double = 0.0
-     val brasil = Locale("pt", "BR")
-     val br : NumberFormat = NumberFormat.getCurrencyInstance(brasil)
+    private val brasil = Locale("pt", "BR")
+    private val br: NumberFormat = NumberFormat.getCurrencyInstance(brasil)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_de_cambio)
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
 
         inicializaComponentes()
         btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
         btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
         trazInformacaoMoedaParaTelaDeCambio()
-        cliqueVoltarHome()
+
     }
 
     private fun setOnClickListenner() {
@@ -59,12 +64,6 @@ class Cambio : AppCompatActivity() {
         }
     }
 
-    private fun cliqueVoltarHome() {
-        btnCambioVoltarHome.setOnClickListener {
-            finish()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         etxtCambioQuanditaDeMoeda.text.clear()
@@ -72,9 +71,10 @@ class Cambio : AppCompatActivity() {
     }
 
     private fun trazInformacaoMoedaParaTelaDeCambio() {
+        tvToolbar.text = getString(R.string.cambio)
         moedaModel = intent.getSerializableExtra("cambio") as? MoedaModel
         moedaModel?.let {
-            tvToolbar.text = getString(R.string.cambio)
+
             preencherCamposNaTelaCambio(it)
             alteraCorDaVariacaoDaMoeda(moedaModel = it, tvCambioVariacaoDaMoeda)
             execucaoBtnVendaECompra(moedaModel = it)
@@ -93,7 +93,7 @@ class Cambio : AppCompatActivity() {
         }
         tvCambioVariacaoDaMoeda.text =
             buildString {
-                append(it.variacao_moeda.toString().toBigDecimal().setScale(2, RoundingMode.UP))
+              append (it.variacao_moeda.toString().toBigDecimal().setScale(2, RoundingMode.UP))
                 append("%")
             }
         tvCambioValorCompraMoeda.text =
@@ -119,14 +119,12 @@ class Cambio : AppCompatActivity() {
         tvCambioVariacaoDaMoeda = findViewById(R.id.tv_Cambio_Variacao)
         tvCambioValorCompraMoeda = findViewById(R.id.tv_Cambio_ValorCompra)
         tvCambioValorVendaMoeda = findViewById(R.id.tv_Cambio_ValorVenda)
-        btnCambioVoltarHome = findViewById(R.id.btn_CompraVenda_VoltarCambio)
         btnCambioVender = findViewById(R.id.btn_CompraVenda_Home)
         btnCambioComprar = findViewById(R.id.btn_Cambio_Comprar)
         etxtCambioQuanditaDeMoeda = findViewById(R.id.etxt_Cambio_QuantidadeMoeda)
         tvCamioSaldoDisponivel = findViewById(R.id.tv_Cambio_SdDisponivel)
         tvCambioSaldoEmCaixa = findViewById(R.id.tv_Cambio_SdCaixa)
         tvToolbar = findViewById(R.id.tv_Toolbar)
-
     }
 
     private fun btnCalcularVendaMoeda() {
