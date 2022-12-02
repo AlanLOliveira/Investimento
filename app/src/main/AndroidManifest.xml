@@ -24,9 +24,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".main.CompraVendaMoedas"
+            android:launchMode="singleTop"
             android:exported="false"
             android:parentActivityName=".main.Cambio" >
             <meta-data

@@ -2,8 +2,8 @@ package com.example.moedascambio
 
 import com.example.moedascambio.main.COMPRA
 
-
 object SingletonSimulandoValores {
+
     var totalsaldodisnponivel: Double = 1000.00
 
     var valoresSimulados = HashMap<String, Int>().apply {
@@ -21,7 +21,8 @@ object SingletonSimulandoValores {
 
     fun hashmapPegarValor(isoMoeda: String): Int {
         valoresSimulados[isoMoeda].let { quantidade ->
-            if(quantidade != null) return quantidade
+            if(quantidade != null)
+                return quantidade
             else return 0
         }
     }

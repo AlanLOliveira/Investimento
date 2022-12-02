@@ -21,17 +21,13 @@ class MoedaAdapter(var onclick: (MoedaModel) -> Unit = {}) : RecyclerView.Adapte
                 onclick.invoke(preencherMoeda)
             }
         }
-
     }
     override fun getItemCount(): Int = listaDeMoedas.size
 
     fun atualizar(newList: List<MoedaModel?>) {
         listaDeMoedas.clear()
         listaDeMoedas.addAll(newList)
-
-
     }
-
 }
 
 

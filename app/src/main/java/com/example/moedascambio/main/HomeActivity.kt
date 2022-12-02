@@ -20,11 +20,11 @@ class HomeActivity : BasicActivity() {
         MoedaAdapter()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
+        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), MOEDAS, toolbar = findViewById(R.id.toolbar_Home))
         inicializaViewModel()
         sincronizaDadosMoedas()
         mensagemDeErro()

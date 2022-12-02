@@ -6,8 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-//utilitário para instanciar retrofit chamada no sevidor
-
 class MoedaRetrofit {
 
     private val urlfinance = "https://api.hgbrasil.com/"

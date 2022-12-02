@@ -15,16 +15,7 @@ import com.example.moedascambio.Utils.formataMoedaBrasileira
 import com.example.moedascambio.Utils.formatarPorcentage
 import com.example.moedascambio.model.MoedaModel
 
-
-
-const val COMPRA = "compra"
-const val VENDA = "venda"
-const val CAMBIO = "cambio"
-const val OPERACAO = "operacao"
-const val QUANTIDADE = "quantidade"
-const val RESULTADO = "resultado"
-
-class Cambio :  BasicActivity()  {
+class Cambio : BasicActivity() {
 
     private var moedaModel: MoedaModel? = null
     private lateinit var tvToolbar: TextView
@@ -40,23 +31,22 @@ class Cambio :  BasicActivity()  {
     private var quantidadeMoeda: Int = 0
     private var resultado: Double = 0.0
 
-
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_de_cambio)
+        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), "Câmbio", toolbar = findViewById(R.id.toolbar_Cambio))
         inicializaComponentes()
         btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
         btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
         trazInformacaoMoedaParaTelaDeCambio()
-
     }
 
     private fun setOnClickListenner() {
         btnCambioComprar.setOnClickListener {
-            btnCalcularCompraMoeda()
+             btnCalculaCompraDaMoeda()
         }
         btnCambioVender.setOnClickListener {
-            btnCalcularVendaMoeda()
+            btnCalculaVendaDaMoeda()
         }
     }
 
@@ -67,10 +57,8 @@ class Cambio :  BasicActivity()  {
     }
 
     private fun trazInformacaoMoedaParaTelaDeCambio() {
-        tvToolbar.text = getString(R.string.cambio)
         moedaModel = intent.getSerializableExtra(CAMBIO) as? MoedaModel
         moedaModel?.let {
-
             preencherCamposNaTelaCambio(it)
             alteraCorDaVariacaoDaMoeda(moedaModel = it, tvCambioVariacaoDaMoeda)
             execucaoBtnVendaECompra(moedaModel = it)
@@ -78,7 +66,6 @@ class Cambio :  BasicActivity()  {
     }
 
     private fun preencherCamposNaTelaCambio(it: MoedaModel) {
-
         tvCambioSiglaEMoeda.text = buildString {
             append(it.isoMoeda + getString(R.string.hifen) + it.nome_moeda)
         }
@@ -117,36 +104,22 @@ class Cambio :  BasicActivity()  {
         tvToolbar = findViewById(R.id.tv_Toolbar)
     }
 
-    private fun btnCalcularVendaMoeda(){
-        calculaVendaDaMoeda()
-        moedaModel?.let { alteraValorSimulado(it.isoMoeda, COMPRA, quantidadeMoeda) }
-    }
-
-    private fun btnCalcularCompraMoeda() {
-        calculaCompraDaMoeda()
-        moedaModel?.let { alteraValorSimulado(it.isoMoeda, COMPRA, quantidadeMoeda) }
-    }
-    
-    private fun calculaVendaDaMoeda() {
+    private fun btnCalculaVendaDaMoeda() {
         val valorVendaMoeda = moedaModel?.valor_venda.toString().toDouble()
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
         resultado = valorVendaMoeda * quantidadeMoeda
         totalsaldodisnponivel = (totalsaldodisnponivel + resultado)
-        moedaModel?.quantidade?.let {
-            moedaModel?.quantidade = (it - quantidadeMoeda)
-        }
-        enviarDadosCompraEVendaMoedas(VENDA)
+        moedaModel?.let { alteraValorSimulado(it.isoMoeda, VENDA, quantidadeMoeda) }
+        enviarDadosCompraEVendaMoedas(VENDER)
     }
 
-    private fun calculaCompraDaMoeda() {
+    private fun btnCalculaCompraDaMoeda() {
         val valorCompraMoeda = moedaModel?.valor_compra.toString().toDouble()
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
         resultado = (valorCompraMoeda * quantidadeMoeda)
         totalsaldodisnponivel = (totalsaldodisnponivel - resultado)
-        moedaModel?.quantidade?.let {
-            moedaModel?.quantidade = (it + quantidadeMoeda)
-        }
-        enviarDadosCompraEVendaMoedas(COMPRA)
+        moedaModel?.let { alteraValorSimulado(it.isoMoeda, COMPRA, quantidadeMoeda) }
+        enviarDadosCompraEVendaMoedas(COMPRAR)
     }
     
     private fun execucaoBtnVendaECompra(moedaModel: MoedaModel) {
@@ -170,7 +143,7 @@ class Cambio :  BasicActivity()  {
         ativarbtn: Int,
     ) {
         if (moedaModel.valor_venda != 0.0) {
-            if (ativarbtn <= moedaModel.quantidade) {
+            if (ativarbtn <= hashmapPegarValor(moedaModel.isoMoeda)) {
                 btnCorAtivadoOuDesativado(boolean = true, btnCambioVender)
             } else {
                 btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
@@ -190,7 +163,7 @@ class Cambio :  BasicActivity()  {
             }
         }
     }
-   
+
     private fun btnCorAtivadoOuDesativado(boolean: Boolean, btnAtivarDesativar: Button) {
         btnAtivarDesativar.isEnabled = boolean
         if (boolean) {
@@ -199,7 +172,6 @@ class Cambio :  BasicActivity()  {
             btnAtivarDesativar.alpha = 0.5F
         }
     }
-
     private fun enviarDadosCompraEVendaMoedas(operacao: String) {
         val infoMoedas = Intent(this, CompraVendaMoedas::class.java)
         infoMoedas.putExtra(OPERACAO, operacao)
@@ -208,6 +180,4 @@ class Cambio :  BasicActivity()  {
         infoMoedas.putExtra(CAMBIO, moedaModel)
         startActivity(infoMoedas)
     }
-
-
 }

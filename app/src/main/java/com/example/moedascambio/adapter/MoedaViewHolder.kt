@@ -8,7 +8,6 @@ import com.example.moedascambio.Utils
 import com.example.moedascambio.Utils.formatarPorcentage
 import com.example.moedascambio.model.MoedaModel
 
-
   class MoedaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val tvMoeda = itemView.findViewById<TextView>(R.id.textView_moeda_title)

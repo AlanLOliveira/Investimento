@@ -8,16 +8,16 @@
     tools:context=".main.Cambio">
 
  <include
-     android:id="@+id/toolbar_Padrao"
+     android:id="@+id/toolbar_Cambio"
      layout="@layout/toolbar"
      tools:layout_editor_absoluteX="136dp"
      tools:layout_editor_absoluteY="0dp"/>
 
  <LinearLayout
      android:id="@+id/linearLayout_TelaCambio"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="200dp"
-     android:layout_margin="12dp"
+     android:layout_margin="24dp"
      android:layout_marginTop="88dp"
      android:focusable="true"
      android:background="@drawable/shape_cambio_info"
@@ -25,7 +25,7 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/toolbar_Padrao"
+     app:layout_constraintTop_toBottomOf="@+id/toolbar_Cambio"
      app:layout_constraintVertical_bias="0.0">
 
   <TextView
@@ -88,9 +88,9 @@
 
  <TextView
      android:id="@+id/tv_Cambio_SdDisponivel"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="27dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:text=""
      android:textColor="@color/white"
      android:importantForAccessibility="yes"
@@ -101,9 +101,9 @@
 
  <TextView
      android:id="@+id/tv_Cambio_SdCaixa"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="27dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:text=""
      android:importantForAccessibility="yes"
      android:textSize="24sp"
@@ -114,11 +114,12 @@
 
  <com.google.android.material.textfield.TextInputEditText
      android:id="@+id/etxt_Cambio_QuantidadeMoeda"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="54dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:background="@drawable/shape_edittext"
      android:hint="@string/quantidade"
+     android:maxLength="10"
      android:textColor="@color/grey"
      android:inputType="number"
      android:textColorHint="@color/grey"
