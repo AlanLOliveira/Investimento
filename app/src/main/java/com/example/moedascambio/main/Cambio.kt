@@ -5,22 +5,26 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.doOnTextChanged
 import com.example.moedascambio.R
-import com.example.moedascambio.SingletonSimulandoValores.buscaValorSimulado
-import com.example.moedascambio.SingletonSimulandoValores.modificaValorPosOperacao
+import com.example.moedascambio.SingletonSimulandoValores.alteraValorSimulado
+import com.example.moedascambio.SingletonSimulandoValores.hashmapPegarValor
 import com.example.moedascambio.SingletonSimulandoValores.totalsaldodisnponivel
 import com.example.moedascambio.Utils.alteraCorDaVariacaoDaMoeda
+import com.example.moedascambio.Utils.formataMoedaBrasileira
+import com.example.moedascambio.Utils.formatarPorcentage
 import com.example.moedascambio.model.MoedaModel
-import java.math.RoundingMode
-import java.text.NumberFormat
-import java.util.*
 
 
-class Cambio : AppCompatActivity() {
 
+const val COMPRA = "compra"
+const val VENDA = "venda"
+const val CAMBIO = "cambio"
+const val OPERACAO = "operacao"
+const val QUANTIDADE = "quantidade"
+const val RESULTADO = "resultado"
+
+class Cambio :  BasicActivity()  {
 
     private var moedaModel: MoedaModel? = null
     private lateinit var tvToolbar: TextView
@@ -28,26 +32,18 @@ class Cambio : AppCompatActivity() {
     private lateinit var tvCambioVariacaoDaMoeda: TextView
     private lateinit var tvCambioValorCompraMoeda: TextView
     private lateinit var tvCambioValorVendaMoeda: TextView
-    private lateinit var tvCamioSaldoDisponivel: TextView
+    private lateinit var tvCambioSaldoDisponivel: TextView
     private lateinit var tvCambioSaldoEmCaixa: TextView
     private lateinit var btnCambioVender: Button
     private lateinit var btnCambioComprar: Button
     private lateinit var etxtCambioQuanditaDeMoeda: EditText
     private var quantidadeMoeda: Int = 0
     private var resultado: Double = 0.0
-    private val brasil = Locale("pt", "BR")
-    private val br: NumberFormat = NumberFormat.getCurrencyInstance(brasil)
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_de_cambio)
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = ""
-
         inicializaComponentes()
         btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
         btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
@@ -72,7 +68,7 @@ class Cambio : AppCompatActivity() {
 
     private fun trazInformacaoMoedaParaTelaDeCambio() {
         tvToolbar.text = getString(R.string.cambio)
-        moedaModel = intent.getSerializableExtra("cambio") as? MoedaModel
+        moedaModel = intent.getSerializableExtra(CAMBIO) as? MoedaModel
         moedaModel?.let {
 
             preencherCamposNaTelaCambio(it)
@@ -83,34 +79,28 @@ class Cambio : AppCompatActivity() {
 
     private fun preencherCamposNaTelaCambio(it: MoedaModel) {
 
-
-        if (moedaModel?.totalsaldocaixa == 0) {
-            buscaValorSimulado(it)
-        }
         tvCambioSiglaEMoeda.text = buildString {
-            append(it.isoMoeda + " - " + it.nome_moeda)
-
+            append(it.isoMoeda + getString(R.string.hifen) + it.nome_moeda)
         }
         tvCambioVariacaoDaMoeda.text =
             buildString {
-              append (it.variacao_moeda.toString().toBigDecimal().setScale(2, RoundingMode.UP))
-                append("%")
-            }
+              append (formatarPorcentage(it.variacao_moeda)).toString()
+               }
         tvCambioValorCompraMoeda.text =
             buildString {
-                append("Compra: " +  br.format(it.valor_compra).toString())
-           }
+                append(getString(R.string.compra) +  formataMoedaBrasileira(it.valor_compra))
+            }
         tvCambioValorVendaMoeda.text = buildString {
-            append("Venda: " + br.format(it.valor_venda).toString())
+            append(getString(R.string.venda) + formataMoedaBrasileira(it.valor_venda))
         }
         tvCambioSaldoEmCaixa.text = buildString {
-            append((moedaModel?.totalsaldocaixa))
-            append(" ")
+            append(hashmapPegarValor(it.isoMoeda))
+            append(getString(R.string.espaco))
             append(it.nome_moeda)
-            append(" em caixa")
+            append(getString(R.string.em_caixa))
         }
-        tvCamioSaldoDisponivel.text = buildString {
-            append("Saldo disponível: " + br.format(totalsaldodisnponivel).toString())
+        tvCambioSaldoDisponivel.text = buildString {
+            append(getString(R.string.saldoDisponivel) + (getString(R.string.espaco)) + formataMoedaBrasileira(totalsaldodisnponivel))
        }
     }
 
@@ -122,19 +112,19 @@ class Cambio : AppCompatActivity() {
         btnCambioVender = findViewById(R.id.btn_CompraVenda_Home)
         btnCambioComprar = findViewById(R.id.btn_Cambio_Comprar)
         etxtCambioQuanditaDeMoeda = findViewById(R.id.etxt_Cambio_QuantidadeMoeda)
-        tvCamioSaldoDisponivel = findViewById(R.id.tv_Cambio_SdDisponivel)
+        tvCambioSaldoDisponivel = findViewById(R.id.tv_Cambio_SdDisponivel)
         tvCambioSaldoEmCaixa = findViewById(R.id.tv_Cambio_SdCaixa)
         tvToolbar = findViewById(R.id.tv_Toolbar)
     }
 
-    private fun btnCalcularVendaMoeda() {
+    private fun btnCalcularVendaMoeda(){
         calculaVendaDaMoeda()
-        moedaModel?.let { modificaValorPosOperacao(it) }
+        moedaModel?.let { alteraValorSimulado(it.isoMoeda, COMPRA, quantidadeMoeda) }
     }
 
     private fun btnCalcularCompraMoeda() {
         calculaCompraDaMoeda()
-        moedaModel?.let { modificaValorPosOperacao(it) }
+        moedaModel?.let { alteraValorSimulado(it.isoMoeda, COMPRA, quantidadeMoeda) }
     }
     
     private fun calculaVendaDaMoeda() {
@@ -142,21 +132,21 @@ class Cambio : AppCompatActivity() {
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
         resultado = valorVendaMoeda * quantidadeMoeda
         totalsaldodisnponivel = (totalsaldodisnponivel + resultado)
-        moedaModel?.totalsaldocaixa?.let {
-            moedaModel?.totalsaldocaixa = (it - quantidadeMoeda)
-
+        moedaModel?.quantidade?.let {
+            moedaModel?.quantidade = (it - quantidadeMoeda)
         }
-        enviarDadosCompraEVendaMoedas("venda")
+        enviarDadosCompraEVendaMoedas(VENDA)
     }
+
     private fun calculaCompraDaMoeda() {
         val valorCompraMoeda = moedaModel?.valor_compra.toString().toDouble()
         quantidadeMoeda = etxtCambioQuanditaDeMoeda.text.toString().toInt()
         resultado = (valorCompraMoeda * quantidadeMoeda)
         totalsaldodisnponivel = (totalsaldodisnponivel - resultado)
-        moedaModel?.totalsaldocaixa?.let {
-            moedaModel?.totalsaldocaixa = (it + quantidadeMoeda)
+        moedaModel?.quantidade?.let {
+            moedaModel?.quantidade = (it + quantidadeMoeda)
         }
-        enviarDadosCompraEVendaMoedas("compra")
+        enviarDadosCompraEVendaMoedas(COMPRA)
     }
     
     private fun execucaoBtnVendaECompra(moedaModel: MoedaModel) {
@@ -180,13 +170,14 @@ class Cambio : AppCompatActivity() {
         ativarbtn: Int,
     ) {
         if (moedaModel.valor_venda != 0.0) {
-            if (ativarbtn <= moedaModel.totalsaldocaixa) {
+            if (ativarbtn <= moedaModel.quantidade) {
                 btnCorAtivadoOuDesativado(boolean = true, btnCambioVender)
             } else {
                 btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)
             }
         }
     }
+
     private fun validaFuncaoAtivarBtnCompra(
         moedaModel: MoedaModel,
         ativarbtn: Int,
@@ -211,11 +202,12 @@ class Cambio : AppCompatActivity() {
 
     private fun enviarDadosCompraEVendaMoedas(operacao: String) {
         val infoMoedas = Intent(this, CompraVendaMoedas::class.java)
-        infoMoedas.putExtra("operacao", operacao)
-        infoMoedas.putExtra("quantidade", quantidadeMoeda)
-        infoMoedas.putExtra("resultado", resultado)
-        infoMoedas.putExtra("cambio", moedaModel)
+        infoMoedas.putExtra(OPERACAO, operacao)
+        infoMoedas.putExtra(QUANTIDADE, quantidadeMoeda)
+        infoMoedas.putExtra(RESULTADO, resultado)
+        infoMoedas.putExtra(CAMBIO, moedaModel)
         startActivity(infoMoedas)
     }
+
 
 }

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MoedaRetrofit {
 
-    private val URLFINANCE = "https://api.hgbrasil.com/"
+    private val urlfinance = "https://api.hgbrasil.com/"
 
     fun moedaRetrofitInstance( ) : MoedaService {
         val interceptor = HttpLoggingInterceptor().apply {
@@ -20,7 +20,7 @@ class MoedaRetrofit {
 
            val retrofit : Retrofit = Retrofit.Builder()
                .client(client)
-               .baseUrl(URLFINANCE)
+               .baseUrl(urlfinance)
                .addConverterFactory(GsonConverterFactory.create())
                .build()
             return retrofit.create(MoedaService::class.java)

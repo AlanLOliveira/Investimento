@@ -3,8 +3,6 @@ package com.example.moedascambio.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +12,7 @@ import com.example.moedascambio.repository.RepositorioMoeda
 import com.example.moedascambio.viewmodel.MoedaViewModel
 import com.example.moedascambio.viewmodel.ViewModelIFactory
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BasicActivity() {
 
     private lateinit var rvMoedas: RecyclerView
     private lateinit var moedaViewModel: MoedaViewModel
@@ -22,20 +20,14 @@ class HomeActivity : AppCompatActivity() {
         MoedaAdapter()
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
-        desativarVoltar()
         inicializaViewModel()
         sincronizaDadosMoedas()
         mensagemDeErro()
-    }
-
-    private fun desativarVoltar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar_Home)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     private fun mensagemDeErro() {
@@ -69,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
     private fun configuraCliqueDoCard() {
         moedaAdapter.onclick = {
             Intent(this, Cambio::class.java).apply {
-                putExtra("cambio", it)
+                putExtra(CAMBIO, it)
                 startActivity(this)
             }
         }

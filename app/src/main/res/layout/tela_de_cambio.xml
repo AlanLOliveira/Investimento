@@ -8,7 +8,7 @@
     tools:context=".main.Cambio">
 
  <include
-     android:id="@+id/toolbar"
+     android:id="@+id/toolbar_Padrao"
      layout="@layout/toolbar"
      tools:layout_editor_absoluteX="136dp"
      tools:layout_editor_absoluteY="0dp"/>
@@ -25,7 +25,7 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/toolbar"
+     app:layout_constraintTop_toBottomOf="@+id/toolbar_Padrao"
      app:layout_constraintVertical_bias="0.0">
 
   <TextView
@@ -59,7 +59,7 @@
       android:id="@+id/tv_Cambio_ValorCompra"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="6dp"
+      android:layout_marginTop="8dp"
       android:importantForAccessibility="yes"
       android:fontFamily="@font/arial"
       android:padding="8dp"
@@ -79,6 +79,7 @@
       android:padding="8dp"
       android:textColor="@color/white"
       android:textSize="16sp"
+      android:importantForAccessibility="yes"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="@+id/tv_Cambio_ValorCompra"
       app:layout_constraintTop_toBottomOf="@id/tv_Cambio_ValorCompra" />
