@@ -4,7 +4,7 @@ import com.example.moedascambio.main.COMPRA
 
 object SingletonSimulandoValores {
 
-    var totalsaldodisnponivel: Double = 1000.00
+    var totalsaldodisnponivel: Double = 950.35
 
     var valoresSimulados = HashMap<String, Int>().apply {
 
