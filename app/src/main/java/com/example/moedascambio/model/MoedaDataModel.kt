@@ -10,8 +10,7 @@ data class MoedaDataModel(
 )
 
 data class ResultData(
-    @SerializedName("source")
-    var source: String = "",
+
     @SerializedName("USD")
     var USD: MoedaModel? = null,
     @SerializedName("EUR")

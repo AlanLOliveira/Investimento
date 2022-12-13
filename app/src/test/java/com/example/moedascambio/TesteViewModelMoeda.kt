@@ -15,7 +15,6 @@ class TesteMoedaViewModel : BaseTest() {
     private var viewModel : MoedaViewModel = MoedaViewModel(api)
 
     @Test
-
     fun retornoMoedaApi(){
 
         val resultado = MoedaDataModel().apply {

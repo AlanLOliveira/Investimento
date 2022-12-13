@@ -1,21 +1,20 @@
 package com.example.moedascambio.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.example.moedascambio.R
+import com.example.moedascambio.Utils.formataMoedaBrasileira
 import com.example.moedascambio.model.MoedaModel
-import java.math.RoundingMode
 
-class CompraVendaMoedas : AppCompatActivity() {
+class CompraVendaMoedas : BasicActivity() {
 
     private lateinit var tvCompraVendaDetalhes: TextView
     private lateinit var btnCompraVendaVoltarHome: Button
-    private lateinit var btnCompraVendaVoltarCambio: Button
     private var trazerDadosMoeda: MoedaModel? = null
     private lateinit var tituloToolbar: TextView
+    private var operacao : String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,65 +23,48 @@ class CompraVendaMoedas : AppCompatActivity() {
         inicializaComponentes()
         btnCompraVendaVoltarHome()
         retornaResultadoDaMoeda()
+        operacao?.let { visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), it, toolbar = findViewById(R.id.toolbar_CompraEVenda)) }
     }
-
     private fun retornaResultadoDaMoeda() {
-        trazerDadosMoeda = intent.getSerializableExtra("cambio") as MoedaModel
+        trazerDadosMoeda = intent.getSerializableExtra(CAMBIO) as MoedaModel
         trazerDadosMoeda?.let {
-            recebeInfoVendaOuCompra(it)
-            btnCompraVendaVoltarCambio()
+            operacao = intent.getStringExtra(OPERACAO)
+            val quantidadeMoeda = intent.getIntExtra(QUANTIDADE, 0)
+            val resultado = intent.getDoubleExtra(RESULTADO, 0.0)
+
+            finalizaDetalhesCompraOuVenda(operacao, quantidadeMoeda,it, resultado)
         }
     }
-
-    private fun recebeInfoVendaOuCompra(moeda: MoedaModel) {
-        val operacao = intent.getStringExtra("operacao")
-        val quantidadeMoeda = intent.getIntExtra("quantidade", 0)
-        val resultado = intent.getDoubleExtra("resultado", 0.0)
-
-        configuraExibicaoCompraOuVenda(operacao, quantidadeMoeda, moeda, resultado)
-    }
-
-    private fun configuraExibicaoCompraOuVenda(
+    private fun finalizaDetalhesCompraOuVenda(
         operacao: String?,
         quantidadeMoeda: Int,
         moeda: MoedaModel,
         resultado: Double,
         ) {
 
-        if (operacao == "compra") {
-            tituloToolbar.text = getString(R.string.comprar)
-            tvCompraVendaDetalhes.text = buildString {
+        if (operacao == COMPRAR) {
+             tvCompraVendaDetalhes.text = buildString {
                 append("Parabéns!\n Você acabou de comprar \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
-                append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
+                append("\n${formataMoedaBrasileira(resultado)}")
             }
-        } else if (operacao == "venda") {
-            tituloToolbar.text = getString(R.string.vender)
-            tvCompraVendaDetalhes.text =
+        } else if (operacao == VENDER) {
+             tvCompraVendaDetalhes.text =
                 buildString {
                     append("Parabéns!\n Você acabou de vender \n$quantidadeMoeda ${moeda.isoMoeda} - ${moeda.nome_moeda},\ntotalizando")
-                    append("\n R$ ${(resultado).toBigDecimal().setScale(2, RoundingMode.UP)}")
-                }
+                    append("\n${formataMoedaBrasileira(resultado)}")
+            }
         }
     }
-
     private fun inicializaComponentes() {
         tvCompraVendaDetalhes = findViewById(R.id.tv_CompraVenda_Resultado)
         btnCompraVendaVoltarHome = findViewById(R.id.btn_CompraVenda_Home)
-        btnCompraVendaVoltarCambio = findViewById(R.id.btn_CompraVenda_VoltarCambio)
-        tituloToolbar = findViewById(R.id.toolbar_title_cambio)
+        tituloToolbar = findViewById(R.id.tv_Toolbar)
     }
-
     private fun btnCompraVendaVoltarHome() {
         btnCompraVendaVoltarHome.setOnClickListener {
             intent = Intent(this, HomeActivity::class.java)
             finish()
             startActivity(intent)
-        }
-    }
-
-    private fun btnCompraVendaVoltarCambio() {
-        btnCompraVendaVoltarCambio.setOnClickListener {
-            finish()
         }
     }
 }

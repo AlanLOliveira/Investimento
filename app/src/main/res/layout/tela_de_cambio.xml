@@ -8,16 +8,16 @@
     tools:context=".main.Cambio">
 
  <include
-     android:id="@+id/include_toolbar_TelaCambio"
-     layout="@layout/toolbar_cambio"
+     android:id="@+id/toolbar_Cambio"
+     layout="@layout/toolbar"
      tools:layout_editor_absoluteX="136dp"
-     tools:layout_editor_absoluteY="0dp" />
+     tools:layout_editor_absoluteY="0dp"/>
 
  <LinearLayout
      android:id="@+id/linearLayout_TelaCambio"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="200dp"
-     android:layout_margin="12dp"
+     android:layout_margin="24dp"
      android:layout_marginTop="88dp"
      android:focusable="true"
      android:background="@drawable/shape_cambio_info"
@@ -25,7 +25,7 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/include_toolbar_TelaCambio"
+     app:layout_constraintTop_toBottomOf="@+id/toolbar_Cambio"
      app:layout_constraintVertical_bias="0.0">
 
   <TextView
@@ -59,7 +59,7 @@
       android:id="@+id/tv_Cambio_ValorCompra"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="6dp"
+      android:layout_marginTop="8dp"
       android:importantForAccessibility="yes"
       android:fontFamily="@font/arial"
       android:padding="8dp"
@@ -79,6 +79,7 @@
       android:padding="8dp"
       android:textColor="@color/white"
       android:textSize="16sp"
+      android:importantForAccessibility="yes"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="@+id/tv_Cambio_ValorCompra"
       app:layout_constraintTop_toBottomOf="@id/tv_Cambio_ValorCompra" />
@@ -87,9 +88,9 @@
 
  <TextView
      android:id="@+id/tv_Cambio_SdDisponivel"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="27dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:text=""
      android:textColor="@color/white"
      android:importantForAccessibility="yes"
@@ -100,9 +101,9 @@
 
  <TextView
      android:id="@+id/tv_Cambio_SdCaixa"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="27dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:text=""
      android:importantForAccessibility="yes"
      android:textSize="24sp"
@@ -113,11 +114,12 @@
 
  <com.google.android.material.textfield.TextInputEditText
      android:id="@+id/etxt_Cambio_QuantidadeMoeda"
-     android:layout_width="327dp"
+     android:layout_width="0dp"
      android:layout_height="54dp"
-     android:layout_margin="24dp"
+     android:layout_marginTop="24dp"
      android:background="@drawable/shape_edittext"
      android:hint="@string/quantidade"
+     android:maxLength="10"
      android:textColor="@color/grey"
      android:inputType="number"
      android:textColorHint="@color/grey"
@@ -138,7 +140,6 @@
      android:gravity="center"
      android:importantForAccessibility="yes"
      android:maxLength="6"
-
      android:text="@string/vender"
      android:textColor="@color/white"
      android:textSize="24sp"
@@ -162,26 +163,4 @@
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintEnd_toEndOf="parent" />
 
- <androidx.appcompat.widget.AppCompatButton
-     android:id="@+id/btn_CompraVenda_VoltarCambio"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginEnd="234dp"
-     android:layout_marginStart="9dp"
-     android:importantForAccessibility="yes"
-     android:drawableStart="@drawable/ic_baseline_voltar"
-     android:background="@color/black"
-     android:text="@string/moedas"
-     android:textSize="17sp"
-     android:textAllCaps="false"
-     android:fontFamily="@font/helvetica"
-     android:textColor="@color/white"
-     app:layout_constraintBottom_toBottomOf="@+id/include_toolbar_TelaCambio"
-     app:layout_constraintEnd_toEndOf="@+id/include_toolbar_TelaCambio"
-     app:layout_constraintHorizontal_bias="0.062"
-     app:layout_constraintStart_toStartOf="@+id/include_toolbar_TelaCambio"
-     app:layout_constraintTop_toTopOf="@+id/include_toolbar_TelaCambio"
-     />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>

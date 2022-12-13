@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/textView_moeda_porcent"
         android:layout_width="131dp"
-        android:layout_height="22dp"
+        android:layout_height="24dp"
         android:textStyle="normal"
         android:fontFamily="@font/arialb"
         android:textAlignment="textEnd"
