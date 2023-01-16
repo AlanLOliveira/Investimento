@@ -1,4 +1,4 @@
-package com.example.moedascambio.main
+package com.example.moedascambio.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -24,7 +24,7 @@ class HomeActivity : BasicActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_home)
 
-        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), MOEDAS, toolbar = findViewById(R.id.toolbar_Home))
+        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), MOEDAS, toolbarT = findViewById(R.id.toolbar_Home))
         inicializaViewModel()
         sincronizaDadosMoedas()
         mensagemDeErro()

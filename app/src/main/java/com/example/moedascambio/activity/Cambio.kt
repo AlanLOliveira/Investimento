@@ -1,4 +1,4 @@
-package com.example.moedascambio.main
+package com.example.moedascambio.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -34,7 +34,8 @@ class Cambio : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tela_de_cambio)
-        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), "Câmbio", toolbar = findViewById(R.id.toolbar_Cambio))
+
+        visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), "Câmbio", toolbarT = findViewById(R.id.toolbar_Cambio))
         inicializaComponentes()
         btnCorAtivadoOuDesativado(boolean = false, btnCambioComprar)
         btnCorAtivadoOuDesativado(boolean = false, btnCambioVender)

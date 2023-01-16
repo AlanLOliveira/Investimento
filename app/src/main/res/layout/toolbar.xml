@@ -5,8 +5,9 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:navigationIcon="@drawable/ic_baseline_voltar"
     android:background="@color/black">
+<!--   app:navigationIcon="@drawable/ic_baseline_voltar"-->
+
 
     <TextView
         android:id="@+id/tv_Toolbar"

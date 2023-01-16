@@ -1,4 +1,4 @@
-package com.example.moedascambio.main
+package com.example.moedascambio.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -23,7 +23,7 @@ class CompraVendaMoedas : BasicActivity() {
         inicializaComponentes()
         btnCompraVendaVoltarHome()
         retornaResultadoDaMoeda()
-        operacao?.let { visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), it, toolbar = findViewById(R.id.toolbar_CompraEVenda)) }
+        operacao?.let { visibilidadeBotaoToolbar(tvTitulo = findViewById(R.id.tv_Toolbar), it, toolbarT = findViewById(R.id.toolbar_CompraEVenda)) }
     }
     private fun retornaResultadoDaMoeda() {
         trazerDadosMoeda = intent.getSerializableExtra(CAMBIO) as MoedaModel

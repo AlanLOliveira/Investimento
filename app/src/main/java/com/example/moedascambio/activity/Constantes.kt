@@ -1,4 +1,4 @@
-package com.example.moedascambio.main
+package com.example.moedascambio.activity
 
 const val COMPRAR = "Comprar"
 const val VENDER = "Vender"

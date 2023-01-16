@@ -1,4 +1,4 @@
-package com.example.moedascambio.main
+package com.example.moedascambio.activity
 
 
 import android.os.Build
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
@@ -16,10 +17,12 @@ open class BasicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basic)
-    }
 
-    protected open fun visibilidadeBotaoToolbar(tvTitulo: TextView, titulo: String, toolbar : androidx.appcompat.widget.Toolbar ){
-        setSupportActionBar(toolbar)
+        }
+
+    protected open fun visibilidadeBotaoToolbar(tvTitulo: TextView, titulo: String, toolbarT : Toolbar ){
+
+        setSupportActionBar(toolbarT)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         tvTitulo.text = titulo
         setIsHeading(tvTitulo)

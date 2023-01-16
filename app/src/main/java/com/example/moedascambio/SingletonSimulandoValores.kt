@@ -1,6 +1,6 @@
 package com.example.moedascambio
 
-import com.example.moedascambio.main.COMPRA
+import com.example.moedascambio.activity.COMPRA
 
 object SingletonSimulandoValores {
 
