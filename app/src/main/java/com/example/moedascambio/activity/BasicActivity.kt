@@ -17,7 +17,6 @@ open class BasicActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_basic)
-
         }
 
     protected open fun visibilidadeBotaoToolbar(tvTitulo: TextView, titulo: String, toolbarT : Toolbar ){
